@@ -107,7 +107,7 @@
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
-            z-index: 1002; /* YENİ: Mobil menü üzerinde kalması için */
+            z-index: 1002; /* Mobil menü açıldığında Z-INDEX BİLGİSİ */
         }
 
         .logo img {
@@ -116,6 +116,7 @@
             margin-right: 10px;
             margin-top: 10px;
             object-fit: center;
+            transition: width 0.3s, height 0.3s; /* DÜZELTME 1 İÇİN EKLENDİ */
         }
 
         .header-right {
@@ -184,7 +185,7 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            z-index: 1002; /* YENİ: Mobil menü üzerinde kalması için */
+            z-index: 1002; /* Logoyla aynı */
             color: white;
             padding: 0.5rem;
         }
@@ -194,27 +195,17 @@
         .mobile-nav-close {
             display: none; /* Masaüstünde gizle */
             position: absolute;
-            top: 1rem;
-            right: 1.5rem;
+            top: 1.5rem; /* DÜZELTME 2: Hizalama */
+            right: 1.5rem; /* DÜZELTME 2: Hizalama */
             background: none;
             border: none;
             font-size: 2rem;
             color: #555;
             cursor: pointer;
         }
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-        header.nav-open + .nav-overlay {
-            display: block;
-        }
+        
+        /* DÜZELTME 2: Overlay stilleri kaldırıldı */
+        
         /* --- Bitiş: Mobil Navigasyon Stilleri --- */
 
 
@@ -444,7 +435,6 @@
             font-size: 3rem;
         }
         
-        /* YENİ: Başlık container'ı (mobil düzeltme için) */
         #tanitim .container {
             position: relative;
             z-index: 2;
@@ -810,38 +800,56 @@
 
         @media (max-width: 768px) {
             
-            /* --- YENİ: MOBİL NAVİGASYON --- */
-            .mobile-nav-toggle {
-                display: block; /* Mobilde göster */
-            }
-            .mobile-nav-close {
-                display: block; /* Mobilde göster */
-            }
-
+            /* --- DÜZELTME 1: LOGO ORTALA & KÜÇÜLT --- */
             header .container {
-                flex-direction: row; /* Logo ve hamburger yan yana */
-                justify-content: space-between;
+                flex-direction: row;
+                justify-content: center; /* Logoyu ortala */
                 align-items: center;
                 gap: 0.5rem;
+                position: relative; /* Toggle'u konumlandırmak için */
+            }
+            header .logo img {
+                width: 40px; /* Küçültüldü */
+                height: 40px; /* Küçültüldü */
+                margin-right: 0; /* Ortalandığı için sağ boşluk sıfırlandı */
+            }
+            header.sticky .logo img {
+                width: 35px; /* Küçültüldü */
+                height: 35px; /* Küçültüldü */
+            }
+            /* --- Bitiş: Logo --- */
+
+
+            /* --- DÜZELTME 2: MOBİL NAVİGASYON --- */
+            .mobile-nav-toggle {
+                display: block;
+                position: absolute; /* Konteyner'a göre ayarla */
+                right: 5%; /* Konteyner'ın %90 genişliğine göre sağa yasla */
+            }
+            .mobile-nav-close {
+                display: block;
             }
 
             .header-right {
                 /* Bu artık mobil menü paneli */
                 position: fixed; 
                 top: 0;
-                right: -100%; /* Ekran dışında başla */
-                width: 80%; /* %80 genişlik */
+                right: -100%; 
+                width: 80%; 
                 max-width: 300px;
                 height: 100vh;
                 background: white;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.2);
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
+                
+                /* Sol üste hizalama */
+                justify-content: flex-start; 
+                align-items: flex-start;
+                
                 gap: 2rem;
-                padding: 2rem;
+                padding: 5rem 2rem 2rem 2rem; /* Üstten boşluk (kapatma butonu için) */
                 transition: right 0.4s ease-in-out;
-                z-index: 1000;
+                z-index: 1005; /* DÜZELTME 2: Z-index artırıldı (Logonun (1002) önünde) */
             }
 
             header.nav-open .header-right {
@@ -850,22 +858,22 @@
             
             /* Mobil menü içindeki linkler */
             nav ul { 
-                flex-direction: column; /* Linkleri dikey sırala */
-                align-items: center;
+                flex-direction: column; 
+                align-items: flex-start; /* Sol üste hizalama */
                 gap: 1.5rem;
                 justify-content: center; 
                 padding: 0; 
             }
             nav li { margin: 0; }
             nav a {
-                color: #333; /* Beyaz menü üzerinde koyu renk */
-                font-size: 1.2rem;
+                color: #333; 
+                font-size: 1.4rem; /* DÜZELTME 2: Yazı büyütüldü */
             }
             nav a:hover { color: var(--primary-color); }
 
             .phone-number {
-                color: #333; /* Beyaz menü üzerinde koyu renk */
-                font-size: 1.1rem;
+                color: #333; 
+                font-size: 1.2rem; /* DÜZELTME 2: Yazı büyütüldü */
             }
             .phone-number i {
                 fill: #333;
@@ -882,19 +890,19 @@
             .slider-arrow.next { right: 1rem; }
             h2 { font-size: 1.8rem; }
             
-            /* --- GÜNCELLENDİ: QUICK ACCESS (YATAY KAYDIRMA) --- */
+            /* --- DÜZELTME 3: QUICK ACCESS (YATAY KAYDIRMA) --- */
             #quick-access {
                 padding-top: 1.5rem;
                 padding-bottom: 1.5rem;
             }
             #quick-access .container { 
-                flex-direction: row; /* Dikey değil, yatay */
+                flex-direction: row; 
                 align-items: center; 
-                justify-content: flex-start; /* Soldan başla */
-                overflow-x: auto; /* Yatay kaydırmayı etkinleştir */
-                white-space: nowrap; /* Linklerin alta düşmesini engelle */
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                white-space: nowrap; 
+                flex-wrap: nowrap; /* Yığılmayı engellemek için eklendi */
                 
-                /* Kaydırma çubuğunu gizle (daha şık görünüm) */
                 -ms-overflow-style: none;  /* IE and Edge */
                 scrollbar-width: none;  /* Firefox */
             }
@@ -903,10 +911,10 @@
             }
 
             #quick-access a {
-                margin-bottom: 0; /* Dikey boşluğu sıfırla */
-                width: auto; /* Genişlik otomatik */
+                margin-bottom: 0; 
+                width: auto; 
                 text-align: center; 
-                flex-shrink: 0; /* Elemanların küçülmesini engelle */
+                flex-shrink: 0; /* Elemanların küçülmesini engelle (Çok Önemli) */
                 padding: 0.5rem 1rem;
             }
             /* --- Bitiş: Quick Access --- */
@@ -914,43 +922,39 @@
 
             /* --- GÜNCELLENDİ: TANITIM VİDEOSU GÖRSELİ --- */
             .tanitim-img-container {
-                position: absolute; /* Arka plana al */
+                position: absolute; 
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 100%; /* Section'ın 40vh yüksekliğini al */
-                z-index: 0; /* En altta */
+                height: 100%; 
+                z-index: 0; 
             }
             #tanitim img {
                 width: 100%;
-                height: 100%; /* Konteyneri (40vh) doldur */
-                object-fit: cover; /* Görüntüyü "zoomlayarak" kapla */
+                height: 100%; 
+                object-fit: cover; 
                 object-position: center center;
             }
             #tanitim:hover img {
-                transform: scale(1.1); /* Hover efekti kalsın */
+                transform: scale(1.1); 
             }
-
             #tanitim .tanitim-img-container::before {
-                 z-index: 1; /* Görselin üstünde, metnin altında */
+                 z-index: 1; 
             }
-            
             #tanitim h2 {
-                padding-top: 0; /* Statik padding'i kaldır */
-                position: relative; /* Absolute'dan çıkar */
+                padding-top: 0; 
+                position: relative; 
                 text-align: center;
                 font-size: 2.2rem;
                 width: 100%;
                 left: auto;
                 top: auto;
                 transform: none;
-                /* 40vh'lik alanı dikeyde ortalamaya çalış */
-                padding-top: calc(20vh - 4.5rem); /* 40vh'ın yarısı - metin yüksekliği (yaklaşık) */
+                padding-top: calc(20vh - 4.5rem); 
                 margin-bottom: 0;
             }
             /* --- Bitiş: Tanıtım Videosu --- */
             
-
             .about-grid { 
                 grid-template-columns: 1fr; 
                 gap: 2rem;
@@ -978,24 +982,31 @@
                 flex-direction: column; 
                 align-items: center;
                 gap: 1.5rem;
-                order: 2; /* Logo ve menü aşağıda kalsın */
+                order: 2; 
             }
             .footer-right {
                 flex-direction: column; 
                 align-items: center;
                 gap: 1.5rem;
-                order: 1; /* Sosyal medya ve telefon üste gelsin */
+                order: 1; 
                 margin-left: 0; 
             }
+            
+            /* --- DÜZELTME 4: FOOTER NAVİGASYON --- */
             .footer-nav ul {
                 justify-content: center; 
-                flex-wrap: wrap;
+                flex-wrap: wrap; /* Yatay hizalar ve sığmazsa alta atar */
                 gap: 0.5rem 1rem;
+                width: 100%; /* Kapsayıcısını doldursun */
             }
+            .footer-nav li a {
+                font-size: 0.85rem; /* Yazı tipi biraz küçültüldü */
+            }
+            /* --- Bitiş: Footer Navigasyon --- */
             
             /* Alt bar responsive */
             .footer-bottom-bar .container {
-                flex-direction: column-reverse; /* Önce linkler, sonra copyright */
+                flex-direction: column-reverse; 
                 align-items: center;
                 text-align: center;
             }
@@ -1053,8 +1064,6 @@
             </button>
         </div>
     </header>
-
-    <div class="nav-overlay"></div>
 
     <main>
         <section id="hero-slider">
@@ -1293,23 +1302,21 @@
                 }
             });
 
-            /* --- YENİ: MOBİL MENÜ JAVASCRIPT --- */
+            /* --- DÜZELTME 2: MOBİL MENÜ JAVASCRIPT (OVERLAY KALDIRILDI) --- */
             const mobileToggle = document.querySelector(".mobile-nav-toggle");
             const mobileClose = document.querySelector(".mobile-nav-close");
-            const navOverlay = document.querySelector(".nav-overlay");
             const navLinks = document.querySelectorAll("header .header-right nav a"); // Mobil menüdeki linkler
 
             function closeMobileMenu() {
                 header.classList.remove("nav-open");
             }
 
-            if (mobileToggle && mobileClose && navOverlay) {
+            if (mobileToggle && mobileClose) {
                 mobileToggle.addEventListener("click", () => {
                     header.classList.add("nav-open");
                 });
 
                 mobileClose.addEventListener("click", closeMobileMenu);
-                navOverlay.addEventListener("click", closeMobileMenu);
                 
                 // Bir linke tıklandığında da menü kapansın
                 navLinks.forEach(link => {
