@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutlu Albayrak İnşaat - Anasayfa Taslağı</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/fdf810b10f.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #B22222; 
+            --secondary-color: #fbfbfb;
+            --text-color: #333;
+            --container-width: 1100px;
+            --accent-color: #B22222; 
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden; 
+        }
+        
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--secondary-color);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 { color: var(--text-color); }
+        h2 { text-align: center; font-size: 2.2rem; margin-bottom: 2rem; }
+        section { padding: 3rem 0; }
+
+        header {
+            font-family: 'Roboto', sans-serif;
+            background: transparent; 
+            border-bottom: 1px solid transparent; 
+            padding: 0.25rem 0; 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            box-sizing: border-box;
+            transition: background-color 0.4s ease-out, padding 0.4s ease-out, border-color 0.4s ease-out;
+            font-size: 0.9rem;
+        }
+
+        header.sticky {
+            position: fixed;
+            background: rgba(255, 255, 255, 1); 
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0.5rem 0; 
+            height: 70px;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            z-index: 1002; /* YENİ: Mobil menü üzerinde kalması için */
+        }
+
+        .logo img {
+            width: 50px; 
+            height: 50px;
+            margin-right: 10px;
+            margin-top: 10px;
+            object-fit: center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            font-family: 'Roboto', sans-serif;
+            padding-bottom: 0px;
+            transition: border-color 0.4s ease-out;
+        }
+
+        header.sticky .header-right {
+            margin-bottom: -10px;
+            border-bottom-color: #ddd;
+        }
+
+        header.sticky .logo img {
+            width: 40px;
+            height: 40px;
+            margin-top: 5px;
+        }
+
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav li { margin-left: 2rem; }
+
+        nav a { 
+            text-decoration: none; 
+            color: white; 
+            font-weight: 600; 
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: #ddd; }
+
+        header.sticky nav a { color: #555; }
+        header.sticky nav a:hover { color: var(--primary-color); }
+
+        .phone-number {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .phone-number i {
+            width: 18px;
+            height: 14px;
+            margin-right: 10px;
+            fill: white;
+            transition: fill 0.3s;
+        }
+
+        header.sticky .phone-number { color: var(--text-color); }
+
+        header.sticky .phone-number i {
+            fill: var(--text-color);
+            color: var(--text-color); 
+        }
+
+        /* --- YENİ: MOBİL NAVİGASYON STILLERİ --- */
+        .mobile-nav-toggle {
+            display: none; /* Masaüstünde gizle */
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1002; /* YENİ: Mobil menü üzerinde kalması için */
+            color: white;
+            padding: 0.5rem;
+        }
+        header.sticky .mobile-nav-toggle {
+            color: var(--text-color); /* Sticky header'da rengi değiştir */
+        }
+        .mobile-nav-close {
+            display: none; /* Masaüstünde gizle */
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #555;
+            cursor: pointer;
+        }
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        header.nav-open + .nav-overlay {
+            display: block;
+        }
+        /* --- Bitiş: Mobil Navigasyon Stilleri --- */
+
+
+        #hero-slider {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: #333;
+            padding: 0;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background-position: center;
+
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.1s ease-in-out;
+        }
+
+        .slide.active { 
+            opacity: 1; 
+            transform: scale(1);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0.85) 100%);
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 20%;
+            left: 10%;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .slide-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .slide-content p {
+            font-size: 1.4rem;
+            margin: 1rem 0 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+        }
+
+        .slide-content .btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.75rem;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: background-color 0.2s ease-out;
+        }
+
+        .slide-content .btn:hover { background: var(--accent-color); }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            color: white;
+            z-index: 2;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .slider-arrow.prev { left: 2rem; }
+        .slider-arrow.next { right: 2rem; }
+        .slider-arrow:hover { background-color: var(--accent-color); }
+
+        .scroll-down-arrow {
+            color: rgba(255, 255, 255, 0.85);
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            z-index: 2;
+            font-size: 1.2rem;
+            animation: bounce 1s infinite;
+            text-decoration: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateX(-50%) translateY(12px);
+                opacity: 1;
+            }
+        }
+
+        #quick-access {
+            background: var(--secondary-color);
+            padding: 1rem 0; 
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        }
+
+        #quick-access .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        #quick-access a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 800;
+            padding: 0.75rem 1.25rem;
+            transition: color 0.5s;
+        }
+
+        #quick-access a:hover { color: var(--text-color); }
+
+        #hakkimizda { 
+            width: 100vw;
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            background-image: url('img/hkbg.jpg');
+            filter: sepia(10%);
+            background-repeat: repeat;
+            background-size: 25%;
+            background-color: rgba(255,255,255,0.6);
+            background-blend-mode: overlay;
+
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1.2fr; 
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-text {padding-top: 35%}
+        .about-text p {
+            font-size: 1.5rem; 
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-family: 'Poppins' sans-serif;
+            font-weight: 400;
+        }
+        .about-text h2 {
+            text-align: left;
+            line-height: 1.2;
+            font-size: 2.25rem;
+            font-weight: 800;
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 50px;
+            right: -350px;
+        }
+
+        #tanitim {
+            width: 100vw;
+            overflow: hidden;
+            height: 40vh;
+            background-image: url('img/hkbg.jpg');
+            filter: sepia(10%);
+            background-repeat: repeat;
+            background-size: 25%;
+            background-color: rgba(255,255,255,0.6);
+            background-blend-mode: overlay;
+            padding: 0; 
+            position: relative; 
+         }
+
+         #tanitim .tanitim-img-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); 
+            z-index: 1; 
+            transition: background-color 0.5s ease;
+        }
+
+        #tanitim:hover .tanitim-img-container::before {
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+
+        #tanitim h2 {
+            z-index: 2;
+            color: white;
+            padding-top: 130px;
+            position: absolute;
+            text-align: left;
+            line-height: 1;
+            font-size: 3rem;
+        }
+        
+        /* YENİ: Başlık container'ı (mobil düzeltme için) */
+        #tanitim .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .tanitim-text-0 {
+            font-weight: 900;
+        }
+
+        .tanitim-text-1 {
+            font-family: 'League Script', cursive;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 80%;
+        }
+
+        .tanitim-text-2 {
+            font-size: 35%;
+        }
+
+        .tanitim-img-container {
+            overflow: hidden;
+        }
+
+        #tanitim img {
+            width: 100%;
+            display: block;
+            object-fit: cover ;
+            transition: transform 0.5s ease;
+        }
+
+        #tanitim:hover img {
+            transform: scale(1.1);
+        }
+
+        .tanitim-play {
+            position: absolute;
+            top: 55%;
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            cursor: pointer;
+            user-select: none;
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            color: white;
+            z-index: 3;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: background-color 0.3s, transform 0.5s ease; 
+        } 
+
+        .tanitim-play:hover {
+            background-color: var(--accent-color);
+        }
+        
+        #tanitim:hover .tanitim-play {
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+
+        #kalite-politikasi { 
+            background-image: url('img/hkbg.jpg');
+            filter: sepia(10%);
+            background-repeat: repeat;
+            background-size: 25%;
+            background-color: rgba(255,255,255,0.6);
+            background-blend-mode: overlay;
+            padding: 4rem 0; 
+        }
+
+        #kalite-politikasi h2 {
+            text-align: left;
+            font-weight: 900;
+        }
+        
+        .quality-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr; 
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .quality-intro h3 {
+            font-size: 2rem; 
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            margin-top: 0;
+            opacity: 0.8;
+        }
+        .quality-intro p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .quality-intro img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 50px rgba(0,0,0,0.5);
+            object-fit: cover;
+            height: 250px; 
+        }
+
+        #kalite-politikasi ul { 
+            list-style: none; 
+            padding: 0;
+            max-width: 100%; 
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 1.5rem;
+        }
+        
+        #kalite-politikasi li { 
+            font-size: 1rem; 
+            margin-bottom: 0;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            border-radius: 8px;
+            padding: 1.5rem;
+            padding-left: 3.5rem;
+            position: relative;
+            border: 1px solid #eee; 
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        
+        #kalite-politikasi li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        #kalite-politikasi li::before { 
+            content: '✓'; 
+            position: absolute; 
+            left: 1.25rem; 
+            top: 1.6rem; 
+            font-size: 1.5rem; 
+            color: var(--primary-color); 
+            font-weight: bold; 
+        }
+        /* --- End Kalite Politikası --- */
+
+        #misyon-vizyon {
+            background-image: url('img/hkbg.jpg');
+            filter: sepia(10%);
+            background-repeat: repeat;
+            background-size: 25%;
+            background-color: rgba(255,255,255,0.55);
+            background-blend-mode: overlay;
+        }
+        .mission-vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .mission-vision-grid div { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 50px rgba(0,0,0,0.3); }
+
+        .mission-vision-grid h3 { 
+            font-size: 1.8rem; 
+            margin-top: 0; 
+            border-bottom: 2px solid var(--primary-color); 
+            padding-bottom: 0.5rem; 
+            display: flex;
+            align-items: center;
+            min-height: 40px;
+        }
+        
+        .mission-vision-grid h3 i {
+            margin-right: 1rem;
+            color: var(--primary-color);
+            font-size: 1.7rem;
+            width: 30px; 
+            text-align: center;
+        }
+
+
+        /* --- FOOTER STİLLERİ GÜNCELLENDİ --- */
+        footer {
+            background: #ffffff;
+            color: var(--text-color);
+            padding: 1.5rem 0; /* Ana footer'ın padding'i */
+            margin-top: 2rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 1.5rem; 
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 1.5rem; 
+        }
+        
+        .footer-logo {
+            width: 40px; /* DEĞİŞİKLİK 2: Logo küçültüldü */
+            height: auto;
+            display: block;
+        }
+
+        .footer-nav {
+            display: flex;
+        }
+        .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1rem; 
+        }
+
+        .footer-nav li a {
+            font-weight: 600;
+        }
+        
+        .footer-nav a {
+            color: #555;;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .footer-nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Politika ve Copyright linkleri buradan kaldırıldı */
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem; 
+            margin-left: auto; 
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        .footer-social a {
+            color: #555;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .footer-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        .footer-phone i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        .footer-phone:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Önceki stilleri temizle */
+        .footer-bottom { display: none; }
+        .footer-grid { display: none; }
+        .footer-col { display: none; }
+        .footer-contact-item { display: none; }
+        .footer-policy-links { display: none; }
+        .footer-copyright { display: none; }
+        
+        /* DEĞİŞİKLİK 1: Yeni Alt Bar (Copyright ve Politika) */
+        .footer-bottom-bar {
+            background: var(--secondary-color); /* İstendiği gibi gri (açık gri) */
+            padding: 1rem 0;
+        }
+        .footer-bottom-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-bottom-bar p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        .footer-bottom-bar .policy-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .footer-bottom-bar .policy-links a {
+            color: #777;
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .footer-bottom-bar .policy-links a:hover {
+            color: var(--primary-color);
+        }
+        /* --- End Footer Stilleri --- */
+        
+        
+        /* --- Video Modal CSS --- */
+        .video-modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .video-modal.show {
+            display: flex; 
+        }
+        .video-modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            background: #000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .video-modal-content video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: -35px; 
+            right: -5px; 
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-modal-btn:hover {
+            color: #ccc;
+        }
+        /* --- End Video Modal CSS --- */
+
+
+        @media (max-width: 768px) {
+            
+            /* --- YENİ: MOBİL NAVİGASYON --- */
+            .mobile-nav-toggle {
+                display: block; /* Mobilde göster */
+            }
+            .mobile-nav-close {
+                display: block; /* Mobilde göster */
+            }
+
+            header .container {
+                flex-direction: row; /* Logo ve hamburger yan yana */
+                justify-content: space-between;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .header-right {
+                /* Bu artık mobil menü paneli */
+                position: fixed; 
+                top: 0;
+                right: -100%; /* Ekran dışında başla */
+                width: 80%; /* %80 genişlik */
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 2rem;
+                transition: right 0.4s ease-in-out;
+                z-index: 1000;
+            }
+
+            header.nav-open .header-right {
+                right: 0; /* Ekrana kaydır */
+            }
+            
+            /* Mobil menü içindeki linkler */
+            nav ul { 
+                flex-direction: column; /* Linkleri dikey sırala */
+                align-items: center;
+                gap: 1.5rem;
+                justify-content: center; 
+                padding: 0; 
+            }
+            nav li { margin: 0; }
+            nav a {
+                color: #333; /* Beyaz menü üzerinde koyu renk */
+                font-size: 1.2rem;
+            }
+            nav a:hover { color: var(--primary-color); }
+
+            .phone-number {
+                color: #333; /* Beyaz menü üzerinde koyu renk */
+                font-size: 1.1rem;
+            }
+            .phone-number i {
+                fill: #333;
+                color: #333;
+            }
+            /* --- Bitiş: Mobil Navigasyon --- */
+
+
+            .slide-content { left: 5%; bottom: 15%; width: 90%; }
+            .slide-content h1 { font-size: 2.5rem; }
+            .slide-content p { font-size: 1.1rem; }
+            .slider-arrow { width: 45px; height: 45px; font-size: 2rem; }
+            .slider-arrow.prev { left: 1rem; }
+            .slider-arrow.next { right: 1rem; }
+            h2 { font-size: 1.8rem; }
+            
+            /* --- GÜNCELLENDİ: QUICK ACCESS (YATAY KAYDIRMA) --- */
+            #quick-access {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+            #quick-access .container { 
+                flex-direction: row; /* Dikey değil, yatay */
+                align-items: center; 
+                justify-content: flex-start; /* Soldan başla */
+                overflow-x: auto; /* Yatay kaydırmayı etkinleştir */
+                white-space: nowrap; /* Linklerin alta düşmesini engelle */
+                
+                /* Kaydırma çubuğunu gizle (daha şık görünüm) */
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
+            }
+            #quick-access .container::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera */
+            }
+
+            #quick-access a {
+                margin-bottom: 0; /* Dikey boşluğu sıfırla */
+                width: auto; /* Genişlik otomatik */
+                text-align: center; 
+                flex-shrink: 0; /* Elemanların küçülmesini engelle */
+                padding: 0.5rem 1rem;
+            }
+            /* --- Bitiş: Quick Access --- */
+
+
+            /* --- GÜNCELLENDİ: TANITIM VİDEOSU GÖRSELİ --- */
+            .tanitim-img-container {
+                position: absolute; /* Arka plana al */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%; /* Section'ın 40vh yüksekliğini al */
+                z-index: 0; /* En altta */
+            }
+            #tanitim img {
+                width: 100%;
+                height: 100%; /* Konteyneri (40vh) doldur */
+                object-fit: cover; /* Görüntüyü "zoomlayarak" kapla */
+                object-position: center center;
+            }
+            #tanitim:hover img {
+                transform: scale(1.1); /* Hover efekti kalsın */
+            }
+
+            #tanitim .tanitim-img-container::before {
+                 z-index: 1; /* Görselin üstünde, metnin altında */
+            }
+            
+            #tanitim h2 {
+                padding-top: 0; /* Statik padding'i kaldır */
+                position: relative; /* Absolute'dan çıkar */
+                text-align: center;
+                font-size: 2.2rem;
+                width: 100%;
+                left: auto;
+                top: auto;
+                transform: none;
+                /* 40vh'lik alanı dikeyde ortalamaya çalış */
+                padding-top: calc(20vh - 4.5rem); /* 40vh'ın yarısı - metin yüksekliği (yaklaşık) */
+                margin-bottom: 0;
+            }
+            /* --- Bitiş: Tanıtım Videosu --- */
+            
+
+            .about-grid { 
+                grid-template-columns: 1fr; 
+                gap: 2rem;
+            }
+            .about-image { 
+                grid-row: 1; 
+            }
+            .about-text p {
+                font-size: 1rem;
+            }
+            
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-vision-grid { grid-template-columns: 1fr; gap: 2rem; }
+            
+            /* --- FOOTER RESPONSIVE GÜNCELLENDİ --- */
+            .footer-content {
+                flex-direction: column; 
+                align-items: center; 
+                gap: 2rem; 
+            }
+            .footer-left {
+                flex-direction: column; 
+                align-items: center;
+                gap: 1.5rem;
+                order: 2; /* Logo ve menü aşağıda kalsın */
+            }
+            .footer-right {
+                flex-direction: column; 
+                align-items: center;
+                gap: 1.5rem;
+                order: 1; /* Sosyal medya ve telefon üste gelsin */
+                margin-left: 0; 
+            }
+            .footer-nav ul {
+                justify-content: center; 
+                flex-wrap: wrap;
+                gap: 0.5rem 1rem;
+            }
+            
+            /* Alt bar responsive */
+            .footer-bottom-bar .container {
+                flex-direction: column-reverse; /* Önce linkler, sonra copyright */
+                align-items: center;
+                text-align: center;
+            }
+            .footer-bottom-bar .policy-links {
+                justify-content: center;
+                gap: 1rem;
+            }
+            .footer-bottom-bar .policy-links a {
+                margin-left: 0;
+            }
+            /* --- End Footer Responsive --- */
+        }
+
+        .animated-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="img/icon.svg" alt="Mutlu Albayrak İnşaat Logosu">
+            </a>
+            <div class="header-right">
+                <button class="mobile-nav-close" aria-label="Menüyü kapat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="#projeler">PROJELER</a></li>
+                        <li><a href="#proje-haritasi">PROJE HARİTASI</a></li>
+                        <li><a href="#iletisim">İLETİŞİM</a></li>
+                    </ul>
+                </nav>
+                <a href="tel:4440588" class="phone-number">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>444 0 588</span>
+                </a>
+            </div>
+            <button class="mobile-nav-toggle" aria-label="Menüyü aç">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="nav-overlay"></div>
+
+    <main>
+        <section id="hero-slider">
+            <div class="slide active" style="background-image: url('https://images.pexels.com/photos/258846/pexels-photo-258846.jpeg');">
+                <div class="slide-content">
+                    <h1>Modern Mimari</h1>
+                    <p>Şehre değer katan yenilikçi tasarımlar.</p>
+                    <a href="#hakkimizda" class="btn">Hakkımızda</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.pexels.com/photos/421927/pexels-photo-421927.jpeg');">
+                <div class="slide-content">
+                    <h1>Kaliteli Yaşam Alanları</h1>
+                    <p>Güven ve tecrübeyle geleceği inşa ediyoruz.</p>
+                    <a href="#projeler" class="btn">Projelerimizi İnceleyin</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.pexels.com/photos/5309172/pexels-photo-5309172.jpeg');">
+                <div class="slide-content">
+                    <h1>300.000 m² Deneyim</h1>
+                    <p>Uzman kadromuzla taahhüt işlerinizde yanınızdayız.</p>
+                    <a href="#kalite-politikasi" class="btn">Kalite Politikamız</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.pexels.com/photos/5309158/pexels-photo-5309158.jpeg');">
+                <div class="slide-content">
+                    <h1>Geleceğe Güvenle Bakın</h1>
+                    <p>Hayalinizdeki yapı için bize ulaşın.</p>
+                    <a href="#iletisim" class="btn">Bize Ulaşın</a>
+                </div>
+            </div>
+
+            <div class="slider-arrow prev"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="slider-arrow next"><i class="fa-solid fa-chevron-right"></i></div>
+
+            <a href="#quick-access-st" class="scroll-down-arrow">
+                <i class="fa-solid fa-angles-down" id="quick-access-st"></i>
+            </a>
+        </section>
+
+        <section id="quick-access">
+            <div class="container">
+                <a href="#hakkimizda">HAKKIMIZDA</a>
+                <a href="#tanitim">TANITIM FİLMİ</a>
+                <a href="#kalite-politikasi">KALİTE POLİTİKASI</a>
+                <a href="#misyon-vizyon">MİSYON VE VİZYON</a>
+            </div>
+        </section>
+
+        <section id="hakkimizda" class="animated-section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h2>Sağlam Temeller ile<br><span style="font-weight: 400">Mutlu Yarınlar İnşa Ediyoruz</span></h2>
+                        <p>
+                            2016 yılında kurulan Mutlu Albayrak İnşaat, Birkan Hamzaoğlu ve Emrullah Albayrak yönetiminde...
+                        </p>
+                        <p>
+                            Gelecekteki hedefimiz ülkemizde üstleneceğimiz müteahhitlik ve taahhüt işlerinde kaliteli ve güvenli
+                            yapılar inşa ederek insanlara güvenli yaşam alanları sunmaktır.
+                        </p>
+                    </div>
+                    <div class="about-image">
+                        <img src="img/hk-ph.png" alt="Hakkımızda Görseli">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tanitim" class="animated-section">
+            <div class="container">
+                <h2><span class="tanitim-text-0">MUTLU İNŞAAT</span><br><span class="tanitim-text-1">50. yıl </span> <span class="tanitim-text-2">REKLAM FİLMİ</span></h2>
+            </div>
+            
+            <div class="tanitim-play" id="play-video-btn">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            
+            <div class="tanitim-img-container">
+                <img src="img/tv.jpg">
+            </div>
+        </section>
+
+        <section id="kalite-politikasi" class="animated-section">
+            <div class="container">
+                <h2>KALİTE POLİTİKASI</h2>
+                
+                <div class="quality-grid">
+                    
+                    <div class="quality-intro">
+                        <h3>Sadece İnşa Etmiyor, <br>Değer Yaratıyoruz</h3>
+                        <p>
+                            Mutlu Albayrak İnşaat için kalite, bir standarttan öte, her projemize işlediğimiz bir imzadır. Müşteri memnuniyetini temel alarak, en modern teknolojiyi ve en iyi malzemeleri kullanıyoruz.
+                        </p>
+                        <img src="https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg" alt="Kalite ve Güven Görseli">
+                    </div>
+
+                    <div class="quality-list">
+                        <ul>
+                            <li>
+                                Mutlu Albayrak İnşaat olarak altyapı ve üstyapı projelerinde...
+                            </li>
+                            <li>
+                                Müşteri ihtiyaçlarını ve beklentilerini dikkate alarak...
+                            </li>
+                            <li>
+                                Kaynaklarımızı en etkin ve verimli bir şekilde kullanarak...
+                            </li>
+                            <li>
+                                Çalışanlarımızın katılımı ile sürekli iyileştirme sağlayarak...
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="misyon-vizyon" class="animated-section">
+            <div class="container">
+                <div class="mission-vision-grid">
+                    <div class="mission">
+                        <h3><i class="fa-solid fa-rocket"></i> Misyon</h3>
+                        <p>
+                            İnsanların yaşam kalitesini yükselten, dürüstlük ve şeffaflık ilkeleriyle...
+                        </p>
+                    </div>
+                    <div class="vision">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Vizyon</h3>
+                        <p>
+                            Yurt içinde kaliteli mühendislik hizmeti almış projelerle fark yaratarak...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                
+                <div class="footer-left">
+                    <a href="#" class="logo">
+                        <img src="img/icon.svg" alt="Mutlu Albayrak İnşaat Logosu" class="footer-logo">
+                    </a>
+                    <nav class="footer-nav"> 
+                        <ul>
+                            <li><a href="#hakkimizda">HAKKIMIZDA</a></li>
+                            <li><a href="#projeler">PROJELER</a></li>
+                            <li><a href="#iletisim">İLETİŞİM</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    <a href="tel:4440588" class="footer-phone"> 
+                        <i class="fa-solid fa-phone"></i>
+                        <span>444 0 588</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+    
+    <div class="footer-bottom-bar">
+        <div class="container">
+            <p>&copy; 2025 Mutlu Albayrak İnşaat. Tüm hakları saklıdır.</p>
+            <div class="policy-links">
+                <a href="/kvkk">KİŞİSEL VERİLERİN KORUNMASI</a>
+                <a href="/cerez-politikasi">ÇEREZ POLİTİKASI</a>
+            </div>
+        </div>
+    </div>
+    <div id="video-modal" class="video-modal">
+        <div class="video-modal-content">
+            <span id="close-modal-btn" class="close-modal-btn">&times;</span>
+            <video id="popup-video" controls preload="none" style="background: #000;">
+                <source src="img/promo.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+        </div>
+    </div>
+
+
+    <script>
+        window.onload = function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const slides = document.querySelectorAll("#hero-slider .slide");
+            const prev = document.querySelector("#hero-slider .prev");
+            const next = document.querySelector("#hero-slider .next");
+
+            let currentSlide = 0;
+            const slideCount = slides.length;
+
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove("active"));
+                slides[n].classList.add("active");
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                showSlide(currentSlide);
+            }
+
+            next.addEventListener("click", nextSlide);
+            prev.addEventListener("click", prevSlide);
+
+            const header = document.querySelector("header");
+            const stickyThreshold = 50; 
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > stickyThreshold) {
+                    header.classList.add("sticky");
+                } else {
+                    header.classList.remove("sticky");
+                }
+            });
+
+            /* --- YENİ: MOBİL MENÜ JAVASCRIPT --- */
+            const mobileToggle = document.querySelector(".mobile-nav-toggle");
+            const mobileClose = document.querySelector(".mobile-nav-close");
+            const navOverlay = document.querySelector(".nav-overlay");
+            const navLinks = document.querySelectorAll("header .header-right nav a"); // Mobil menüdeki linkler
+
+            function closeMobileMenu() {
+                header.classList.remove("nav-open");
+            }
+
+            if (mobileToggle && mobileClose && navOverlay) {
+                mobileToggle.addEventListener("click", () => {
+                    header.classList.add("nav-open");
+                });
+
+                mobileClose.addEventListener("click", closeMobileMenu);
+                navOverlay.addEventListener("click", closeMobileMenu);
+                
+                // Bir linke tıklandığında da menü kapansın
+                navLinks.forEach(link => {
+                    link.addEventListener("click", closeMobileMenu);
+                });
+            }
+            /* --- Bitiş: Mobil Menü JavaScript --- */
+
+
+            const video = document.getElementById("promo-video");
+
+            if (video) { 
+                const observerOptions = {
+                    root: null,
+                    rootMargin: "0px",
+                    threshold: 0.5 
+                };
+
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                    });
+                }, observerOptions);
+
+                videoObserver.observe(video);
+            }
+
+            const animatedSections = document.querySelectorAll(".animated-section");
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                    } else {
+                        // İsteğe bağlı: Ekrandan çıkınca animasyonu sıfırla
+                        // entry.target.classList.remove("is-visible");
+                    }
+                });
+            }, { threshold: 0.1 }); 
+
+            animatedSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            const playBtn = document.getElementById("play-video-btn");
+            const videoModal = document.getElementById("video-modal");
+            const closeModalBtn = document.getElementById("close-modal-btn");
+            const popupVideo = document.getElementById("popup-video");
+
+            if (playBtn && videoModal && closeModalBtn && popupVideo) {
+                playBtn.addEventListener("click", (e) => {
+                    e.preventDefault(); 
+                    videoModal.classList.add("show");
+                    popupVideo.play();
+                });
+
+                closeModalBtn.addEventListener("click", () => {
+                    videoModal.classList.remove("show");
+                    popupVideo.pause();
+                    popupVideo.currentTime = 0; 
+                });
+
+                videoModal.addEventListener("click", (e) => {
+                    if (e.target === videoModal) {
+                        videoModal.classList.remove("show");
+                        popupVideo.pause();
+                        popupVideo.currentTime = 0; 
+                    }
+                });
+            }
+
+        });
+    </script>
+
+</body>
+</html>
