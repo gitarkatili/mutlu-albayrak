@@ -14,11 +14,11 @@
     <script src="https://kit.fontawesome.com/fdf810b10f.js" crossorigin="anonymous"></script>
     <style>
         :root {
-            --primary-color: #B22222; 
+            --primary-color: #2b3890; 
             --secondary-color: #fbfbfb;
             --text-color: #333;
             --container-width: 1100px;
-            --accent-color: #B22222; 
+            --accent-color: #2b3890; 
         }
 
         html { scroll-behavior: smooth; }
@@ -111,12 +111,19 @@
         }
 
         .logo img {
-            width: 50px; 
-            height: 50px;
+            width: 100px; 
+            height: 100px;
             margin-right: 10px;
             margin-top: 10px;
             object-fit: center;
             transition: width 0.3s, height 0.3s; /* DÜZELTME 1 İÇİN EKLENDİ */
+        }
+
+        .logo .logo-default {
+            display: block; /* Varsayılan (beyaz) logoyu göster */
+        }
+        .logo .logo-sticky {
+            display: none; /* Sticky (siyah) logoyu gizle */
         }
 
         .header-right {
@@ -137,6 +144,13 @@
             width: 40px;
             height: 40px;
             margin-top: 5px;
+        }
+
+        header.sticky .logo .logo-default {
+            display: none; /* Varsayılan (beyaz) logoyu gizle */
+        }
+        header.sticky .logo .logo-sticky {
+            display: block; /* Sticky (siyah) logoyu göster */
         }
 
         nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
@@ -243,7 +257,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0.85) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 35%, rgba(0,0,0,0.2) 100%);
         }
 
         .slide-content {
@@ -276,7 +290,7 @@
             padding: 0.75rem 1.75rem;
             text-decoration: none;
             font-weight: 700;
-            border-radius: 5px;
+            border-radius: 50px;
             transition: background-color 0.2s ease-out;
         }
 
@@ -312,14 +326,14 @@
             left: 50%;
             z-index: 2;
             font-size: 1.2rem;
-            animation: bounce 1s infinite;
+            animation: bounce 1.2s infinite;
             text-decoration: none;
         }
 
         @keyframes bounce {
             0%, 100% {
                 transform: translateX(-50%) translateY(0);
-                opacity: 0.8;
+                opacity: 1;
             }
             50% {
                 transform: translateX(-50%) translateY(12px);
@@ -592,7 +606,7 @@
         .mission-vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
         .mission-vision-grid div { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 50px rgba(0,0,0,0.3); }
 
-        .mission-vision-grid h3 { 
+        .mission-vision-grid h2 { 
             font-size: 1.8rem; 
             margin-top: 0; 
             border-bottom: 2px solid var(--primary-color); 
@@ -602,7 +616,7 @@
             min-height: 40px;
         }
         
-        .mission-vision-grid h3 i {
+        .mission-vision-grid h2 i {
             margin-right: 1rem;
             color: var(--primary-color);
             font-size: 1.7rem;
@@ -704,11 +718,8 @@
             transition: color 0.3s;
         }
         .footer-phone i {
-            color: var(--primary-color);
+            color: var(--text-color);
             font-size: 1.1rem;
-        }
-        .footer-phone:hover {
-            color: var(--primary-color);
         }
         
         /* Önceki stilleri temizle */
@@ -798,6 +809,184 @@
         /* --- End Video Modal CSS --- */
 
 
+        /* --- YENİ EKLENDİ: SİZİ ARAYALIM FORMU STILLERI --- */
+
+        .call-me-back-trigger {
+            position: fixed;
+            top: 250px;
+            right: 15px;
+            transform: rotate(90deg);
+            transform-origin: top right;
+            background: var(--secondary-color);
+            color: black;
+            border: none;
+            padding: 0.6rem 1rem;
+            font-weight: 700;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 998;
+            border-radius: 50px;
+            transition: background-color 0.3s;
+        }
+        .call-me-back-trigger:hover {
+            background-color: var(--accent-color);
+            color: white;
+            opacity: 0.9;
+        }
+
+        .form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1004;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .form-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .call-me-back-panel {
+            position: fixed; 
+            top: 0;
+            right: -100%; 
+            width: 90%; 
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 5rem 2rem 2rem 2rem;
+            transition: right 0.4s ease-in-out;
+            z-index: 1005;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .call-me-back-panel.is-open {
+            right: 0;
+        }
+
+        .call-me-back-panel .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .call-back-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .call-back-form h2 {
+            text-align: left;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 0 0 0.25rem 0;
+        }
+        
+        .call-back-form p {
+            text-align: left;
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0 0 1rem 0;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 0.5rem;
+        }
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            box-sizing: border-box; 
+            background: #f9f9f9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(43, 56, 144, 0.3);
+            outline: none;
+            background: #fff;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .form-group-checkbox input[type="checkbox"] {
+            width: auto;
+            accent-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .form-submit-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+        .form-submit-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* --- Bitiş: Sizi Arayalım Formu Stilleri --- */
+
+
         @media (max-width: 768px) {
             
             /* --- DÜZELTME 1: LOGO ORTALA & KÜÇÜLT --- */
@@ -809,13 +998,13 @@
                 position: relative; /* Toggle'u konumlandırmak için */
             }
             header .logo img {
-                width: 40px; /* Küçültüldü */
-                height: 40px; /* Küçültüldü */
+                width: 80px; /* Küçültüldü */
+                height: 80px; /* Küçültüldü */
                 margin-right: 0; /* Ortalandığı için sağ boşluk sıfırlandı */
             }
             header.sticky .logo img {
-                width: 35px; /* Küçültüldü */
-                height: 35px; /* Küçültüldü */
+                width: 40px; /* Küçültüldü */
+                height: 40px; /* Küçültüldü */
             }
             /* --- Bitiş: Logo --- */
 
@@ -986,8 +1175,12 @@
                 order: 2; 
             }
             .footer-right {
-                flex-direction: column; 
-                align-items: center;
+                flex-direction: row; 
+                align-items: center; 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                white-space: nowrap; 
+                flex-wrap: nowrap; /* Yığılmayı engellemek için eklendi */
                 gap: 1.5rem;
                 order: 1; 
                 margin-left: 0; 
@@ -995,10 +1188,13 @@
             
             /* --- DÜZELTME 4: FOOTER NAVİGASYON --- */
             .footer-nav ul {
-                display: hidden;
-                justify-content: center; 
+                flex-direction: row; 
+                align-items: center; 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                white-space: nowrap; 
+                flex-wrap: nowrap; /* Yığılmayı engellemek için eklendi */
                 flex-wrap: wrap; /* Yatay hizalar ve sığmazsa alta atar */
-                gap: 0.5rem 1rem;
                 width: 100%; /* Kapsayıcısını doldursun */
             }
             .footer-nav li a {
@@ -1020,6 +1216,24 @@
                 margin-left: 0;
             }
             /* --- End Footer Responsive --- */
+
+            /* --- YENİ EKLENDİ: Sizi Arayalım Formu Responsive --- */
+            .call-me-back-panel {
+                max-width: 320px; /* Mobilde biraz daha dar */
+                padding: 4rem 1.5rem 2rem 1.5rem; /* Padding ayarı */
+            }
+            .call-back-form h2 {
+                font-size: 1.6rem;
+            }
+            .call-back-form p {
+                font-size: 0.85rem;
+            }
+            .call-me-back-trigger {
+                top: 150px; /* Mobilde biraz daha yukarıda */
+                padding: 0.7rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
         }
 
         .animated-section {
@@ -1043,7 +1257,8 @@
     <header>
         <div class="container">
             <a href="#" class="logo">
-                <img src="img/icon.svg" alt="Mutlu Albayrak İnşaat Logosu">
+                <img src="img/icon-wh.svg" alt="Mutlu Albayrak İnşaat Logosu" class="logo-default">
+                <img src="img/icon-bk.svg" alt="Mutlu Albayrak İnşaat Logosu" class="logo-sticky">
             </a>
             <div class="header-right">
                 <button class="mobile-nav-close" aria-label="Menüyü kapat">
@@ -1188,13 +1403,13 @@
             <div class="container">
                 <div class="mission-vision-grid">
                     <div class="mission">
-                        <h3><i class="fa-solid fa-rocket"></i> Misyon</h3>
+                        <h2><i class="fa-solid fa-rocket"></i> Misyon</h2>
                         <p>
                             İnsanların yaşam kalitesini yükselten, dürüstlük ve şeffaflık ilkeleriyle...
                         </p>
                     </div>
                     <div class="vision">
-                        <h3><i class="fa-solid fa-lightbulb"></i> Vizyon</h3>
+                        <h2><i class="fa-solid fa-lightbulb"></i> Vizyon</h2>
                         <p>
                             Yurt içinde kaliteli mühendislik hizmeti almış projelerle fark yaratarak...
                         </p>
@@ -1210,7 +1425,7 @@
                 
                 <div class="footer-left">
                     <a href="#" class="logo">
-                        <img src="img/icon.svg" alt="Mutlu Albayrak İnşaat Logosu" class="footer-logo">
+                        <img src="img/icon-footer.svg" alt="Mutlu Albayrak İnşaat Logosu" class="footer-logo">
                     </a>
                     <nav class="footer-nav"> 
                         <ul>
@@ -1257,6 +1472,65 @@
     </div>
 
 
+    <button class="call-me-back-trigger" id="call-me-back-trigger">
+        <i class="fa-solid fa-phone"></i> Sizi Arayalım
+    </button>
+    
+    <div class="form-overlay" id="form-overlay"></div>
+    
+    <div class="call-me-back-panel" id="call-me-back-panel">
+        <button class="close-btn" id="call-me-back-close" aria-label="Formu kapat">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    
+        <form class="call-back-form" action="https://api.web3forms.com/submit" method="POST">
+            
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE"> 
+            
+            <h2>Sizi Arayalım</h2>
+            <p>Projelerimiz Hakkında Bilgi Almak ve Avantajlarından Yararlanmak İçin Bilgi Formunu Doldurunuz.</p>
+            
+            <div class="form-group">
+                <label for="proje">İlgilendiğiniz Proje</label>
+                <select name="proje" id="proje" required>
+                    <option value="" disabled selected>Lütfen bir proje seçin...</option>
+                    <option value="Secenek 1">Seçenek 1</option>
+                    <option value="Secenek 2">Seçenek 2</option>
+                    <option value="Secenek 3">Seçenek 3</option>
+                    <option value="Secenek 4">Seçenek 4</option>
+                    <option value="Secenek 5">Seçenek 5</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Adınız Soyadınız</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Telefon Numaranız</label>
+                <input type="tel" name="phone" id="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-Posta Adresiniz</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Mesajınız (İsteğe bağlı)</label>
+                <textarea name="message" id="message"></textarea>
+            </div>
+            
+            <div class="form-group-checkbox">
+                <input type="checkbox" name="kvkk" id="kvkk" required>
+                <label for="kvkk">Kişisel Veri İşleme Şartları'nı kabul ediyorum.</label>
+            </div>
+
+            <button type="submit" class="form-submit-btn">Gönder</button>
+            
+        </form>
+    </div>
     <script>
         window.onload = function() {
             const preloader = document.getElementById('preloader');
@@ -1393,6 +1667,34 @@
                     }
                 });
             }
+
+            
+            /* --- YENİ EKLENDİ: SİZİ ARAYALIM FORM PANELİ JAVASCRIPT --- */
+            const callMeBackTrigger = document.getElementById("call-me-back-trigger");
+            const callMeBackPanel = document.getElementById("call-me-back-panel");
+            const callMeBackClose = document.getElementById("call-me-back-close");
+            const formOverlay = document.getElementById("form-overlay");
+
+            function openFormPanel() {
+                if (callMeBackPanel) callMeBackPanel.classList.add("is-open");
+                if (formOverlay) formOverlay.classList.add("is-open");
+            }
+
+            function closeFormPanel() {
+                if (callMeBackPanel) callMeBackPanel.classList.remove("is-open");
+                if (formOverlay) formOverlay.classList.remove("is-open");
+            }
+
+            if (callMeBackTrigger) {
+                callMeBackTrigger.addEventListener("click", openFormPanel);
+            }
+            if (callMeBackClose) {
+                callMeBackClose.addEventListener("click", closeFormPanel);
+            }
+            if (formOverlay) {
+                formOverlay.addEventListener("click", closeFormPanel);
+            }
+            /* --- Bitiş: Sizi Arayalım Form Paneli JavaScript --- */
 
         });
     </script>
