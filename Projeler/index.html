@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutlu Albayrak İnşaat - Projeler</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Script&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fdf810b10f.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #2b3890; 
+            --secondary-color: #fbfbfb;
+            --text-color: #333;
+            --container-width: 1100px;
+            --accent-color: #2b3890; 
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--secondary-color);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .container {
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 { color: var(--text-color); }
+        h2 { text-align: center; font-size: 2.2rem; margin-bottom: 2rem; }
+        section { padding: 3rem 0; }
+
+        header {
+            font-family: 'Roboto', sans-serif;
+            background: transparent; 
+            border-bottom: 1px solid transparent; 
+            padding: 0.25rem 0; 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            box-sizing: border-box;
+            transition: background-color 0.4s ease-out, padding 0.4s ease-out, border-color 0.4s ease-out;
+            font-size: 0.9rem;
+        }
+
+        header.sticky {
+            position: fixed;
+            background: rgba(255, 255, 255, 1); 
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 0.5rem 0; 
+            height: 70px;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            z-index: 1002;
+        }
+
+        .logo img {
+            width: 100px; 
+            height: 100px;
+            margin-right: 10px;
+            margin-top: 10px;
+            object-fit: center;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .logo .logo-default {
+            display: block;
+        }
+        .logo .logo-sticky {
+            display: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            font-family: 'Roboto', sans-serif;
+            padding-bottom: 0px;
+            transition: border-color 0.4s ease-out;
+        }
+
+        header.sticky .header-right {
+            margin-bottom: -10px;
+            border-bottom-color: #ddd;
+        }
+
+        header.sticky .logo img {
+            width: 40px;
+            height: 40px;
+            margin-top: 5px;
+        }
+
+        header.sticky .logo .logo-default {
+            display: none;
+        }
+        header.sticky .logo .logo-sticky {
+            display: block;
+        }
+
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav li { margin-left: 2rem; }
+
+        nav a { 
+            text-decoration: none; 
+            color: white; 
+            font-weight: 600; 
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: #ddd; }
+
+        header.sticky nav a { color: #555; }
+        header.sticky nav a:hover { color: var(--primary-color); }
+
+        .phone-number {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .phone-number i {
+            width: 18px;
+            height: 14px;
+            margin-right: 10px;
+            fill: white;
+            transition: fill 0.3s;
+        }
+
+        header.sticky .phone-number { color: var(--text-color); }
+
+        header.sticky .phone-number i {
+            fill: var(--text-color);
+            color: var(--text-color); 
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1002;
+            color: white;
+            padding: 0.5rem;
+        }
+        header.sticky .mobile-nav-toggle {
+            color: var(--text-color);
+        }
+        .mobile-nav-close {
+            display: none;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #555;
+            cursor: pointer;
+        }
+
+        /* Projects Section */
+        .projects-header {
+            width: 100vw;
+            background-color: rgb(26, 28, 90);
+            padding: 1rem 1rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgb(26, 28, 90) 35%, rgb(26, 28, 90) 100%);
+        }
+
+        .projects-header h2 {
+            font-size: 2.5rem;
+            padding: 8rem 0 2rem 8rem;
+            text-align: left;
+            font-weight: 900;
+            color: white;
+        }
+
+        /* Filter Buttons */
+        .projects-filters {
+            width: 100vw;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            top: 0;
+            z-index: 99;
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Roboto', sans-serif;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            cursor: pointer;
+            border-radius: 0px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(43, 56, 144, 0.3);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(43, 56, 144, 0.3);
+        }
+
+        /* Project Item Filtering */
+        .project-item {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .project-item.hidden {
+            display: none;
+        }
+        
+        #projects {
+            padding: 2rem 0 4rem 0;
+            background: url('../img/hkbg.jpg');
+            background-size: 25%;
+            filter: sepia(10%);
+            background-repeat: repeat;
+            background-color: rgba(255,255,255,0.6);
+            background-blend-mode: overlay;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .project-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            cursor: pointer;
+        }
+
+        .project-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            transition: background 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .project-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .project-location {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+            font-family: 'Roboto', sans-serif;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50px;
+            padding: 0.2rem 0.8rem;
+        }
+
+        .project-item:hover .project-overlay {
+            background: rgba(0, 0, 0, 0);
+        }
+
+        .project-item:hover .project-name {
+            opacity: 0;
+        }
+
+        .project-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-item:hover .project-location {
+            opacity: 0;
+        }
+
+        .project-go {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 10px black;
+            font-weight: 800;
+            text-align: center;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+
+        .project-item:hover .project-go {
+            opacity: 1;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #ffffff;
+            color: var(--text-color);
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 1.5rem; 
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 1.5rem; 
+        }
+        
+        .footer-logo {
+            width: 40px;
+            height: auto;
+            display: block;
+        }
+
+        .footer-nav {
+            display: flex;
+        }
+        .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1rem; 
+        }
+
+        .footer-nav li a {
+            font-weight: 600;
+        }
+        
+        .footer-nav a {
+            color: #555;;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .footer-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem; 
+            margin-left: auto; 
+        }
+
+        .footer-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        .footer-phone i {
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .footer-bottom-bar {
+            background: var(--secondary-color);
+            padding: 1rem 0;
+        }
+        .footer-bottom-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-bottom-bar p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        .footer-bottom-bar .policy-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .footer-bottom-bar .policy-links a {
+            color: #777;
+            font-size: 0.8rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .footer-bottom-bar .policy-links a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 0.5rem;
+                position: relative;
+            }
+            header .logo img {
+                width: 80px;
+                height: 80px;
+                margin-right: 0;
+            }
+            header.sticky .logo img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+                position: absolute;
+                right: 5%;
+                padding-top: 15px;
+            }
+            .mobile-nav-close {
+                display: block;
+            }
+
+            .header-right {
+                position: fixed; 
+                top: 0;
+                right: -100%; 
+                width: 80%; 
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+                flex-direction: column;
+                justify-content: flex-start; 
+                align-items: flex-start;
+                gap: 2rem;
+                padding: 5rem 2rem 2rem 2rem;
+                transition: right 0.4s ease-in-out;
+                z-index: 1005;
+            }
+
+            header.nav-open .header-right {
+                right: 0;
+            }
+            
+            nav ul { 
+                flex-direction: column; 
+                align-items: flex-start;
+                gap: 1.5rem;
+                justify-content: center; 
+                padding: 0; 
+            }
+            nav li { margin: 0; }
+            nav a {
+                color: #333; 
+                font-size: 1.4rem;
+            }
+            nav a:hover { color: var(--primary-color); }
+
+            .phone-number {
+                color: #333; 
+                font-size: 1.2rem;
+            }
+            .phone-number i {
+                fill: #333;
+                color: #333;
+            }
+            
+            .projects-header * {
+                margin: 0;
+                align-items: center;
+                justify-content: center;
+                justify-items: center;
+            }
+
+            .projects-header h2 {
+                font-size: 2rem;
+                text-align: left;
+                padding: 6rem 0 1rem 1rem;
+            }
+
+            .projects-filters {
+                padding: 1rem 0;
+            }
+
+            .filters-container {
+                gap: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .filter-btn {
+                padding: 0.8rem 0.5rem;
+                font-size: 0.75rem;
+                flex: 1;
+                min-width: 0;
+                white-space: nowrap;
+                text-align: center;
+            }
+
+            #projects {
+                padding: 2rem 0 3rem 0;
+            }
+
+            #projects h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-name {
+                font-size: 1.5rem;
+            }
+
+            .project-location {
+                font-size: 1rem;
+                bottom: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column; 
+                align-items: center; 
+                gap: 2rem; 
+            }
+            .footer-left {
+                flex-direction: column; 
+                align-items: center;
+                gap: 1.5rem;
+                order: 2; 
+            }
+            .footer-right {
+                flex-direction: row; 
+                align-items: center; 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                white-space: nowrap; 
+                flex-wrap: nowrap;
+                gap: 1.5rem;
+                order: 1; 
+                margin-left: 0; 
+            }
+            
+            .footer-nav ul {
+                flex-direction: row; 
+                align-items: center; 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                white-space: nowrap; 
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .footer-nav li a {
+                font-size: 0.85rem;
+            }
+            
+            .footer-bottom-bar .container {
+                flex-direction: column-reverse; 
+                align-items: center;
+                text-align: center;
+            }
+            .footer-bottom-bar .policy-links {
+                justify-content: center;
+                gap: 1rem;
+            }
+            .footer-bottom-bar .policy-links a {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../img/icon-wh.png" alt="Mutlu Albayrak İnşaat Logosu" class="logo-default">
+                <img src="../img/icon-bk.svg" alt="Mutlu Albayrak İnşaat Logosu" class="logo-sticky">
+            </a>
+            <div class="header-right">
+                <button class="mobile-nav-close" aria-label="Menüyü kapat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="index.html#projeler">PROJELER</a></li>
+                        <li><a href="index.html#proje-haritasi">PROJE HARİTASI</a></li>
+                        <li><a href="index.html#iletisim">İLETİŞİM</a></li>
+                    </ul>
+                </nav>
+                <a href="tel:4440588" class="phone-number">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>444 0 588</span>
+                </a>
+            </div>
+            <button class="mobile-nav-toggle" aria-label="Menüyü aç">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="projects-header">
+            <h2>PROJELER</h2>
+        </div>
+        <div class="projects-filters">
+            <div class="container">
+                <div class="filters-container">
+                    <button class="filter-btn active" data-filter="tamamlanan">TAMAMLANAN PROJELER</button>
+                    <button class="filter-btn" data-filter="gelecek">GELECEK PROJELER</button>
+                    <button class="filter-btn" data-filter="satistaki">SATIŞTAKİ PROJELER</button>
+                </div>
+            </div>
+        </div>
+        <section id="projects">
+            <div class="container">
+                <div class="projects-grid">
+                    <div class="project-item tamamlanan">
+                        <a href="Radius-Esenyurt/index.html" target="_blank">
+                        <img src="../img/radius-esenyurt.jpg" alt="Radius Esenyurt">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Radius Esenyurt</div>
+                        <div class="project-location">Esenyurt</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item tamamlanan">
+                        <a href="Palm-Marin/index.html" target="_blank">
+                        <img src="../img/palmmarin.jpg" alt="Palm Marin">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Palm Marin</div>
+                        <div class="project-location">Beylikdüzü</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item tamamlanan">
+                        <a href="Casablu/index.html" target="_blank">
+                        <img src="../img/casablu.jpg" alt="Casablu Büyükçekmece">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Casablu</div>
+                        <div class="project-location">Büyükçekmece</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item tamamlanan">
+                        <a href="Radius-Sefakoy/index.html" target="_blank">
+                        <img src="../img/radius.jpg" alt="Radius Sefaköy">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Radius Sefaköy</div>
+                        <div class="project-location">Sefaköy</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item tamamlanan">
+                        <a href="Villa-Marin/index.html" target="_blank">
+                        <img src="../img/villamarin.jpg" alt="Villa Marin Beylikdüzü">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Villa Marin</div>
+                        <div class="project-location">Beylikdüzü</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item tamamlanan">
+                        <a href="Casa-Marin-Butik/index.html" target="_blank">
+                        <img src="../img/casamarin.jpg" alt="Casa Marin Beylikdüzü">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Casa Marin Butik</div>
+                        <div class="project-location">Beylikdüzü</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item gelecek">
+                        <img src="../img/ersa.jpg" alt="Ersa Fabrika Silivri">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Ersa Fabrika</div>
+                        <div class="project-location">Silivri</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item gelecek">
+                        <img src="../img/cetintas.jpg" alt="Çetintaş Avcılar">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Çetintaş</div>
+                        <div class="project-location">Avcılar</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item gelecek">
+                        <img src="../img/kirsan.jpg" alt="Kırşan Kozmetik Esenyurt">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Kırşan Kozmetik Fabrika</div>
+                        <div class="project-location">Esenyurt</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item gelecek">
+                        <img src="../img/apartman-gop.jpg" alt="Apartman Gaziosmanpaşa">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Apartman GOP</div>
+                        <div class="project-location">Gaziosmanpaşa</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                    <div class="project-item gelecek">
+                        <img src="../img/vipamodern.jpg" alt="Vipa Modern Güngören">
+                        <div class="project-overlay"></div>
+                        <div class="project-name">Vipa Modern</div>
+                        <div class="project-location">Güngören</div>
+                        <div class="project-go">İncele <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                
+                <div class="footer-left">
+                    <a href="index.html" class="logo">
+                        <img src="../img/icon-footer.svg" alt="Mutlu Albayrak İnşaat Logosu" class="footer-logo">
+                    </a>
+                    <nav class="footer-nav"> 
+                        <ul>
+                            <li><a href="index.html#hakkimizda">HAKKIMIZDA</a></li>
+                            <li><a href="projects.html">PROJELER</a></li>
+                            <li><a href="index.html#iletisim">İLETİŞİM</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="footer-right">
+                    <a href="tel:4440588" class="footer-phone"> 
+                        <i class="fa-solid fa-phone"></i>
+                        <span>444 0 588</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+    
+    <div class="footer-bottom-bar">
+        <div class="container">
+            <p>&copy; 2025 Mutlu Albayrak İnşaat. Tüm hakları saklıdır.</p>
+            <div class="policy-links">
+                <a href="/kvkk">KİŞİSEL VERİLERİN KORUNMASI</a>
+                <a href="/cerez-politikasi">ÇEREZ POLİTİKASI</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+            window.onload = function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const header = document.querySelector("header");
+            const stickyThreshold = 50; 
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > stickyThreshold) {
+                    header.classList.add("sticky");
+                } else {
+                    header.classList.remove("sticky");
+                }
+            });
+
+            const mobileToggle = document.querySelector(".mobile-nav-toggle");
+            const mobileClose = document.querySelector(".mobile-nav-close");
+            const navLinks = document.querySelectorAll("header .header-right nav a");
+
+            function closeMobileMenu() {
+                header.classList.remove("nav-open");
+            }
+
+            if (mobileToggle && mobileClose) {
+                mobileToggle.addEventListener("click", () => {
+                    header.classList.add("nav-open");
+                });
+
+                mobileClose.addEventListener("click", closeMobileMenu);
+                
+                navLinks.forEach(link => {
+                    link.addEventListener("click", closeMobileMenu);
+                });
+            }
+
+            // Filter System
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const projectItems = document.querySelectorAll(".project-item");
+            let currentFilter = "tamamlanan"; // Default filter
+
+            // Initialize: Show only tamamlanan projects
+            function initializeFilter() {
+                projectItems.forEach(item => {
+                    if (item.classList.contains(currentFilter)) {
+                        item.classList.remove("hidden");
+                    } else {
+                        item.classList.add("hidden");
+                    }
+                });
+            }
+            
+
+            // Filter function
+            function filterProjects(filter) {
+                currentFilter = filter;
+                
+                // Update button states
+                filterButtons.forEach(btn => {
+                    if (btn.getAttribute("data-filter") === filter) {
+                        btn.classList.add("active");
+                    } else {
+                        btn.classList.remove("active");
+                    }
+                });
+
+                // Filter projects
+                projectItems.forEach(item => {
+                    if (item.classList.contains(filter)) {
+                        item.classList.remove("hidden");
+                    } else {
+                        item.classList.add("hidden");
+                    }
+                });
+            }
+
+            // Add click event listeners to filter buttons
+            filterButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const filter = btn.getAttribute("data-filter");
+                    filterProjects(filter);
+                });
+            });
+
+            // Initialize on page load
+            initializeFilter();
+        });
+    </script>
+
+</body>
+</html>
