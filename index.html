@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mutlu Albayrak İnşaat - Anasayfa Taslağı</title>
+    <title>Mutlu Albayrak İnşaat - Ana Sayfa</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -230,24 +230,29 @@
             overflow: hidden;
             background: #333;
             padding: 0;
+            cursor: grab;
+            user-select: none;
+        }
+
+        #hero-slider:active {
+            cursor: grabbing;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
 
         .slide {
             width: 100%;
             height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
+            flex-shrink: 0;
+            position: relative;
             background-size: cover;
             background-position: center;
-
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out, transform 0.1s ease-in-out;
-        }
-
-        .slide.active { 
-            opacity: 1; 
-            transform: scale(1);
         }
 
         .slide::before {
@@ -305,7 +310,7 @@
             background-color: rgba(255, 255, 255, 0.25);
             border-radius: 50%;
             color: white;
-            z-index: 2;
+            z-index: 10;
             width: 60px;
             height: 60px;
             display: flex;
@@ -313,6 +318,7 @@
             justify-content: center;
             font-size: 1rem;
             transition: background-color 0.3s;
+            pointer-events: auto;
         }
 
         .slider-arrow.prev { left: 2rem; }
@@ -690,21 +696,6 @@
             flex-wrap: wrap;
             gap: 1.5rem; 
             margin-left: auto; 
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-        .footer-social a {
-            color: #555;
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .footer-social a:hover {
-            color: var(--primary-color);
-            transform: translateY(-2px);
         }
 
         .footer-phone {
@@ -1229,7 +1220,7 @@
                 font-size: 0.85rem;
             }
             .call-me-back-trigger {
-                top: 150px; /* Mobilde biraz daha yukarıda */
+                top: 250px; /* Mobilde biraz daha yukarıda */
                 padding: 0.7rem 1.2rem;
                 font-size: 0.8rem;
             }
@@ -1266,7 +1257,7 @@
                 </button>
                 <nav>
                     <ul>
-                        <li><a href="#projeler">PROJELER</a></li>
+                        <li><a href="projeler/index.html">PROJELER</a></li>
                         <li><a href="#proje-haritasi">PROJE HARİTASI</a></li>
                         <li><a href="#iletisim">İLETİŞİM</a></li>
                     </ul>
@@ -1284,32 +1275,34 @@
 
     <main>
         <section id="hero-slider">
-            <div class="slide active" style="background-image: url('https://images.pexels.com/photos/258846/pexels-photo-258846.jpeg');">
-                <div class="slide-content">
-                    <h1>Modern Mimari</h1>
-                    <p>Şehre değer katan yenilikçi tasarımlar.</p>
-                    <a href="#hakkimizda" class="btn">Hakkımızda</a>
+            <div class="slides-wrapper">
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/258846/pexels-photo-258846.jpeg');">
+                    <div class="slide-content">
+                        <h1>Modern Mimari</h1>
+                        <p>Şehre değer katan yenilikçi tasarımlar.</p>
+                        <a href="#hakkimizda" class="btn">Hakkımızda</a>
+                    </div>
                 </div>
-            </div>
-            <div class="slide" style="background-image: url('https://images.pexels.com/photos/421927/pexels-photo-421927.jpeg');">
-                <div class="slide-content">
-                    <h1>Kaliteli Yaşam Alanları</h1>
-                    <p>Güven ve tecrübeyle geleceği inşa ediyoruz.</p>
-                    <a href="#projeler" class="btn">Projelerimizi İnceleyin</a>
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/421927/pexels-photo-421927.jpeg');">
+                    <div class="slide-content">
+                        <h1>Kaliteli Yaşam Alanları</h1>
+                        <p>Güven ve tecrübeyle geleceği inşa ediyoruz.</p>
+                        <a href="#projeler" class="btn">Projelerimizi İnceleyin</a>
+                    </div>
                 </div>
-            </div>
-            <div class="slide" style="background-image: url('https://images.pexels.com/photos/5309172/pexels-photo-5309172.jpeg');">
-                <div class="slide-content">
-                    <h1>300.000 m² Deneyim</h1>
-                    <p>Uzman kadromuzla taahhüt işlerinizde yanınızdayız.</p>
-                    <a href="#kalite-politikasi" class="btn">Kalite Politikamız</a>
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/5309172/pexels-photo-5309172.jpeg');">
+                    <div class="slide-content">
+                        <h1>300.000 m² Deneyim</h1>
+                        <p>Uzman kadromuzla taahhüt işlerinizde yanınızdayız.</p>
+                        <a href="#kalite-politikasi" class="btn">Kalite Politikamız</a>
+                    </div>
                 </div>
-            </div>
-            <div class="slide" style="background-image: url('https://images.pexels.com/photos/5309158/pexels-photo-5309158.jpeg');">
-                <div class="slide-content">
-                    <h1>Geleceğe Güvenle Bakın</h1>
-                    <p>Hayalinizdeki yapı için bize ulaşın.</p>
-                    <a href="#iletisim" class="btn">Bize Ulaşın</a>
+                <div class="slide" style="background-image: url('https://images.pexels.com/photos/5309158/pexels-photo-5309158.jpeg');">
+                    <div class="slide-content">
+                        <h1>Geleceğe Güvenle Bakın</h1>
+                        <p>Hayalinizdeki yapı için bize ulaşın.</p>
+                        <a href="#iletisim" class="btn">Bize Ulaşın</a>
+                    </div>
                 </div>
             </div>
 
@@ -1437,11 +1430,6 @@
                 </div>
                 
                 <div class="footer-right">
-                    <div class="footer-social">
-                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </div>
                     <a href="tel:4440588" class="footer-phone"> 
                         <i class="fa-solid fa-phone"></i>
                         <span>444 0 588</span>
@@ -1542,30 +1530,170 @@
 
         document.addEventListener("DOMContentLoaded", () => {
 
+            const slider = document.getElementById("hero-slider");
+            const slidesWrapper = document.querySelector("#hero-slider .slides-wrapper");
             const slides = document.querySelectorAll("#hero-slider .slide");
             const prev = document.querySelector("#hero-slider .prev");
             const next = document.querySelector("#hero-slider .next");
 
             let currentSlide = 0;
             const slideCount = slides.length;
+            const slideWidth = 100; // 100% per slide
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            let offsetX = 0;
+            let isTransitioning = false;
 
-            function showSlide(n) {
-                slides.forEach(slide => slide.classList.remove("active"));
-                slides[n].classList.add("active");
+            // Clone first and last slides for infinite loop
+            const firstClone = slides[0].cloneNode(true);
+            const lastClone = slides[slideCount - 1].cloneNode(true);
+            slidesWrapper.appendChild(firstClone);
+            slidesWrapper.insertBefore(lastClone, slides[0]);
+
+            // Set initial position to show first real slide (index 1 after cloning)
+            function setTransform(offset) {
+                slidesWrapper.style.transform = `translateX(${offset}%)`;
+            }
+
+            function goToSlide(index, animate = true) {
+                if (isTransitioning && animate) return;
+                
+                if (animate) {
+                    isTransitioning = true;
+                    slidesWrapper.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                } else {
+                    slidesWrapper.style.transition = 'none';
+                }
+
+                currentSlide = index;
+                // +1 because first slide is a clone
+                setTransform(-(currentSlide + 1) * slideWidth);
+
+                if (animate) {
+                    setTimeout(() => {
+                        isTransitioning = false;
+                        // Handle infinite loop - jump to clone without animation
+                        if (currentSlide >= slideCount) {
+                            slidesWrapper.style.transition = 'none';
+                            currentSlide = 0;
+                            setTransform(-(currentSlide + 1) * slideWidth);
+                        } else if (currentSlide < 0) {
+                            slidesWrapper.style.transition = 'none';
+                            currentSlide = slideCount - 1;
+                            setTransform(-(currentSlide + 1) * slideWidth);
+                        }
+                    }, 600);
+                }
             }
 
             function nextSlide() {
-                currentSlide = (currentSlide + 1) % slideCount;
-                showSlide(currentSlide);
+                goToSlide(currentSlide + 1, true);
             }
 
             function prevSlide() {
-                currentSlide = (currentSlide - 1 + slideCount) % slideCount;
-                showSlide(currentSlide);
+                goToSlide(currentSlide - 1, true);
             }
 
-            next.addEventListener("click", nextSlide);
-            prev.addEventListener("click", prevSlide);
+            // Initialize
+            goToSlide(0, false);
+
+            // Arrow controls
+            next.addEventListener("click", (e) => {
+                e.stopPropagation();
+                nextSlide();
+            });
+            prev.addEventListener("click", (e) => {
+                e.stopPropagation();
+                prevSlide();
+            });
+
+            // Drag functionality
+            slider.addEventListener("mousedown", (e) => {
+                // Don't start dragging if clicking on arrows or buttons
+                if (e.target.closest('.slider-arrow') || e.target.closest('.btn') || e.target.closest('a')) {
+                    return;
+                }
+                if (isTransitioning) return;
+                isDragging = true;
+                startX = e.clientX;
+                slidesWrapper.style.transition = 'none';
+                e.preventDefault();
+            });
+
+            slider.addEventListener("mousemove", (e) => {
+                if (!isDragging) return;
+                currentX = e.clientX;
+                offsetX = ((currentX - startX) / window.innerWidth) * 100;
+                const baseOffset = -(currentSlide + 1) * slideWidth;
+                setTransform(baseOffset + offsetX);
+            });
+
+            slider.addEventListener("mouseup", () => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const threshold = 10; // Minimum drag distance to trigger slide change
+                if (Math.abs(offsetX) > threshold) {
+                    if (offsetX > 0) {
+                        prevSlide();
+                    } else {
+                        nextSlide();
+                    }
+                } else {
+                    // Snap back to current slide
+                    slidesWrapper.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    goToSlide(currentSlide, true);
+                }
+                offsetX = 0;
+            });
+
+            slider.addEventListener("mouseleave", () => {
+                if (isDragging) {
+                    isDragging = false;
+                    slidesWrapper.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    goToSlide(currentSlide, true);
+                    offsetX = 0;
+                }
+            });
+
+            // Touch support for mobile
+            slider.addEventListener("touchstart", (e) => {
+                // Don't start dragging if touching on arrows or buttons
+                if (e.target.closest('.slider-arrow') || e.target.closest('.btn') || e.target.closest('a')) {
+                    return;
+                }
+                if (isTransitioning) return;
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                slidesWrapper.style.transition = 'none';
+            });
+
+            slider.addEventListener("touchmove", (e) => {
+                if (!isDragging) return;
+                currentX = e.touches[0].clientX;
+                offsetX = ((currentX - startX) / window.innerWidth) * 100;
+                const baseOffset = -(currentSlide + 1) * slideWidth;
+                setTransform(baseOffset + offsetX);
+            });
+
+            slider.addEventListener("touchend", () => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const threshold = 10;
+                if (Math.abs(offsetX) > threshold) {
+                    if (offsetX > 0) {
+                        prevSlide();
+                    } else {
+                        nextSlide();
+                    }
+                } else {
+                    slidesWrapper.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    goToSlide(currentSlide, true);
+                }
+                offsetX = 0;
+            });
 
             const header = document.querySelector("header");
             const stickyThreshold = 50; 
