@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proje Haritası - Mutlu Albayrak İnşaat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fdf810b10f.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #2b3890; 
+            --secondary-color: #fbfbfb;
+            --text-color: #333;
+            --accent-color: #2b3890; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+        }
+
+        .map-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        #map {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #map iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #map iframe.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Hide Google My Maps embed title/header */
+        #map::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgb(255,255,255,1);
+            z-index: 10;
+            pointer-events: none;
+            box-shadow: 0px 1px 20px rgb(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 1rem;
+            left: 2rem;
+            z-index: 1000;
+            background: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .back-button i {
+            font-size: 1.2rem;
+        }
+
+        .projects-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100vh;
+            background: rgb(255,255,255,0.9);
+            z-index: 999;
+            overflow-y: auto;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .projects-sidebar-header {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .projects-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-list-item {
+            background: rgba(0,0,0, 0.05);
+            border-radius: 8px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .project-list-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(0,0,0, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .project-list-item.active {
+            background: rgba(0,0,0,0.15);
+            border-color: white;
+        }
+
+        .project-list-item-content {
+            flex: 1;
+        }
+
+        .project-list-item-name {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .project-list-item-location {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .project-list-item-thumbnail {
+            width: 80px;
+            height: 60px;
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .projects-sidebar {
+                display: none;
+            }
+
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+
+            .back-button i {
+                font-size: 1rem;
+            }
+        }
+
+        /* Scrollbar Styling */
+        .projects-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .projects-sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .projects-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .projects-sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <div id="map">
+            <!-- Iframes will be created dynamically by JavaScript -->
+        </div>
+    </div>
+
+    <a href="../index.html" class="back-button">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Ana Sayfa</span>
+    </a>
+
+    <div class="projects-sidebar">
+        <h2 class="projects-sidebar-header">Proje Haritası</h2>
+        <ul class="projects-list" id="projects-list">
+            <!-- Projects will be populated by JavaScript -->
+        </ul>
+    </div>
+
+    <script>
+        // Base Google My Maps URL
+        // Not: Harita detaylarını azaltmak için Google My Maps'te harita stilini düzenleyin:
+        // 1. Google My Maps'te haritanızı açın
+        // 2. "Temalar" (Themes) sekmesine gidin
+        // 3. "Minimal" veya "Basit" stil seçin
+        // 4. Gereksiz layer'ları gizleyin
+        const baseMapUrl = 'https://www.google.com/maps/d/u/0/embed?mid=1UseeIFfBFG6k3HW7xUNOwhXCMmnKpDo&ehbc=2E312F&noprof=1';
+
+        // Project data with map layer IDs (her proje için Google My Maps'te ayrı layer oluşturulmalı)
+        // Not: Eğer Google My Maps'te her proje için ayrı layer yoksa, 
+        // aynı haritayı gösterir ama tıklama ile iframe değişimi yapılır
+        const projects = [
+            {
+                id: 'radius-esenyurt',
+                name: 'Radius Esenyurt',
+                location: 'Esenyurt',
+                image: '../img/radius-esenyurt.jpg',
+                link: '../Projeler/Radius-Esenyurt/index.html',
+                mapUrl: 'https://www.google.com/maps/d/u/0/embed?mid=1A3D1RxVCMG0RkTE1hbCibGa3r0MGuuU&ehbc=2E312F'
+            },
+            {
+                id: 'palm-marin',
+                name: 'Palm Marin',
+                location: 'Beylikdüzü',
+                image: '../img/palmmarin.jpg',
+                link: '../Projeler/Palm-Marin/index.html',
+                mapUrl: 'https://www.google.com/maps/d/u/0/embed?mid=171vGJTjgH5TcmQv4pHE_jO2oASKkcCM&ehbc=2E312F'
+            },
+            {
+                id: 'casablu',
+                name: 'Casablu İstanbul',
+                location: 'Büyükçekmece',
+                image: '../img/casablu.jpg',
+                link: '../Projeler/Casablu/index.html',
+                mapUrl: 'https://www.google.com/maps/d/u/0/embed?mid=1SKPKscUIMmw1qET5p9Bs--5YRnOC2D8&ehbc=2E312F'
+            },
+            {
+                id: 'radius-sefakoy',
+                name: 'Radius Sefaköy',
+                location: 'Sefaköy',
+                image: '../img/radius.jpg',
+                link: '../Projeler/Radius-Sefakoy/index.html',
+                mapUrl: 'https://www.google.com/maps/d/u/0/embed?mid=1fHjgfyJOru_KMD0eYUOqxzu5WyrVRR4&ehbc=2E312F'
+            },
+            {
+                id: 'villa-marin',
+                name: 'Villa Marin',
+                location: 'Beylikdüzü',
+                image: '../img/villamarin.jpg',
+                link: '../Projeler/Villa-Marin/index.html',
+                mapUrl: 'https://www.google.com/maps/d/u/0/embed?mid=1MAdBt6t_fXhBcSmdB4kMKAOp9U3kcDg&ehbc=2E312F'
+            }
+        ];
+
+        // Create iframe for a project
+        function createProjectIframe(project, isDefault = false) {
+            const iframe = document.createElement('iframe');
+            iframe.className = isDefault ? '' : 'hidden';
+            iframe.setAttribute('data-project-id', project.id);
+            
+            // Her proje için özel harita URL'sini kullan
+            iframe.src = project.mapUrl || baseMapUrl;
+            
+            return iframe;
+        }
+
+        // Show specific project on map
+        function showProjectOnMap(projectIndex) {
+            const project = projects[projectIndex];
+            const allIframes = document.querySelectorAll('#map iframe');
+            
+            // Tüm iframe'leri gizle
+            allIframes.forEach(iframe => {
+                iframe.classList.add('hidden');
+            });
+            
+            // Seçilen projenin iframe'ini göster
+            const targetIframe = document.querySelector(`#map iframe[data-project-id="${project.id}"]`);
+            if (targetIframe) {
+                targetIframe.classList.remove('hidden');
+            }
+        }
+
+        // Show default map (all projects)
+        function showDefaultMap() {
+            const allIframes = document.querySelectorAll('#map iframe');
+            
+            // Tüm iframe'leri gizle
+            allIframes.forEach(iframe => {
+                iframe.classList.add('hidden');
+            });
+            
+            // Varsayılan haritayı göster
+            const defaultIframe = document.querySelector('#map iframe[data-project-id="default"]');
+            if (defaultIframe) {
+                defaultIframe.classList.remove('hidden');
+            }
+        }
+
+        // Populate projects list and create iframes
+        function initializeMap() {
+            const mapContainer = document.getElementById('map');
+            const list = document.getElementById('projects-list');
+            
+            // Varsayılan harita iframe'i (tüm projeleri gösteren)
+            const defaultIframe = document.createElement('iframe');
+            defaultIframe.src = baseMapUrl;
+            defaultIframe.setAttribute('data-project-id', 'default');
+            mapContainer.appendChild(defaultIframe);
+            
+            // Her proje için iframe oluştur
+            projects.forEach((project) => {
+                const projectIframe = createProjectIframe(project);
+                mapContainer.appendChild(projectIframe);
+            });
+            
+            // Proje listesini oluştur
+            projects.forEach((project, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'project-list-item';
+                listItem.id = `project-${index}`;
+                listItem.innerHTML = `
+                    <div class="project-list-item-content">
+                        <div class="project-list-item-name">${project.name}</div>
+                        <div class="project-list-item-location">${project.location}</div>
+                    </div>
+                    <img src="${project.image}" alt="${project.name}" class="project-list-item-thumbnail">
+                `;
+                
+                // Tıklama olayı
+                listItem.addEventListener('click', () => {
+                    const isActive = listItem.classList.contains('active');
+                    
+                    // Eğer zaten aktifse, ana haritaya dön
+                    if (isActive) {
+                        showDefaultMap();
+                        listItem.classList.remove('active');
+                    } else {
+                        // Haritada projeyi göster
+                        showProjectOnMap(index);
+                        
+                        // Aktif durumu güncelle
+                        document.querySelectorAll('.project-list-item').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        listItem.classList.add('active');
+                    }
+                });
+                
+                list.appendChild(listItem);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeMap();
+        });
+    </script>
+</body>
+</html>
+
